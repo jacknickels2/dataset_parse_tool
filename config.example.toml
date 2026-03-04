@@ -1,0 +1,62 @@
+# Example Configuration with Exclusions Enabled
+# This demonstrates how to exclude specific data from processing
+
+[paths]
+input_dir = "data/input/datasets_03-04-26"
+output_dir = "data/output"
+use_timestamp = true
+
+[exclusions]
+# Example: Exclude specific profiles (patients)
+excluded_profiles = [463, 550]
+
+# Example: Exclude date ranges
+# December 2025 and all of January 2026
+excluded_date_ranges = [
+    "20251201-20251231",
+    "20260101-20260131"
+]
+
+# Example: Exclude specific consultations
+excluded_consultations = [2175, 2170]
+
+# Example: Exclude specific files
+excluded_files = [
+    "corrupted_file.mp3",
+    "test_image.jpg"
+]
+
+[validation]
+check_file_existence = true
+check_required_fields = true
+check_file_formats = true
+check_orphaned_files = true
+strict_mode = false
+
+[deduplication]
+use_metadata_deduplication = true
+use_hash_deduplication = true
+keep_occurrence = "first"
+
+[output]
+copy_files = true
+generate_csv = true
+generate_summary_report = true
+generate_errors_report = true
+generate_visualizations = true
+generate_dashboard = true
+
+[output.csv]
+include_source_snapshot = true
+include_file_hash = false
+include_validation_status = true
+
+[statistics]
+calculate_demographics = true
+calculate_temporal = true
+calculate_consultations = true
+calculate_media_distribution = true
+
+[logging]
+verbosity = "normal"
+max_errors_in_report = 100

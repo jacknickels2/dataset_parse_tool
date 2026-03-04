@@ -1,0 +1,123 @@
+# Dataset Parse Tool Configuration File
+# This file controls how the dataset parsing tool operates
+
+[paths]
+# Input directory containing snapshot folders (relative to project root)
+input_dir = "data/input/datasets_03-04-26"
+
+# Output base directory (relative to project root)
+output_dir = "data/output"
+
+# Use timestamp in output folder name (recommended to avoid overwriting)
+use_timestamp = true
+
+[exclusions]
+# Manual exclusions - records matching these criteria will be EXCLUDED from output
+
+# Profile IDs to exclude (list of profile numbers)
+# Example: excluded_profiles = [123, 456, 789]
+excluded_profiles = [459, 548, 549, 550]
+
+# Date ranges to exclude (format: "YYYYMMDD-YYYYMMDD" or "YYYYMMDD")
+# You can specify multiple ranges
+# Examples:
+#   "20251201-20251231"  = Exclude entire December 2025
+#   "20260101"           = Exclude only January 1st 2026
+excluded_date_ranges = []
+
+# Consultation IDs to exclude (list of consultation numbers)
+# Example: excluded_consultations = [1234, 5678]
+excluded_consultations = []
+
+# Specific filenames to exclude (exact match)
+# Example: excluded_files = ["corrupted_audio.mp3", "bad_image.jpg"]
+excluded_files = []
+
+[validation]
+# Enable/disable specific validation checks
+
+# Check if files listed in CSV actually exist on disk
+check_file_existence = true
+
+# Validate that required CSV fields are not empty
+check_required_fields = true
+
+# Validate file formats match their media type
+check_file_formats = true
+
+# Find files in audio/images folders not listed in CSV
+check_orphaned_files = true
+
+# Skip records with validation errors (strict mode)
+# If false, all records are processed even with errors
+strict_mode = false
+
+[deduplication]
+# Control how duplicates are detected and handled
+
+# Use metadata (consultation_id, profile_id, timestamp, filename) for deduplication
+use_metadata_deduplication = true
+
+# Use file hash (SHA256) for content-based deduplication
+use_hash_deduplication = true
+
+# Keep first occurrence vs last occurrence when duplicates found
+# Options: "first" or "last"
+keep_occurrence = "first"
+
+[output]
+# Control what gets generated in the output
+
+# Copy files to output directory (if false, only generates reports)
+copy_files = true
+
+# Generate consolidated CSV file
+generate_csv = true
+
+# Generate summary report (text file)
+generate_summary_report = true
+
+# Generate detailed errors report
+generate_errors_report = true
+
+# Generate visualizations (charts and graphs)
+generate_visualizations = true
+
+# Generate summary dashboard
+generate_dashboard = true
+
+[output.csv]
+# CSV output options
+
+# Include source snapshot column in output CSV
+include_source_snapshot = true
+
+# Include file hash column in output CSV
+include_file_hash = false
+
+# Include validation status column
+include_validation_status = true
+
+[statistics]
+# Control which statistics are calculated and reported
+
+# Enable demographics analysis (gender, age)
+calculate_demographics = true
+
+# Enable temporal analysis (date ranges, trends)
+calculate_temporal = true
+
+# Enable consultation statistics
+calculate_consultations = true
+
+# Enable media distribution analysis
+calculate_media_distribution = true
+
+[logging]
+# Logging and reporting options
+
+# Verbosity level: "quiet", "normal", "verbose"
+verbosity = "normal"
+
+# Maximum number of errors to show in detailed report (0 = unlimited)
+max_errors_in_report = 100
